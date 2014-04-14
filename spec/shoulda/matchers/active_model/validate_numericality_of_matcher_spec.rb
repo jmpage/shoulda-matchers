@@ -236,6 +236,30 @@ describe Shoulda::Matchers::ActiveModel::ValidateNumericalityOfMatcher do
     end
   end
 
+  context 'with large numbers' do
+    context 'the success cases' do
+      it do
+        expect(validating_numericality(less_than: 100000))
+          .to matcher.is_less_than(100000)
+      end
+
+      it do
+        expect(validating_numericality(greater_than: 100000))
+          .to matcher.is_greater_than(100000)
+      end
+
+      it do
+        expect(validating_numericality(greater_than_or_equal_to: 100000))
+          .to matcher.is_greater_than_or_equal_to(100000)
+      end
+
+      it do
+        expect(validating_numericality(less_than_or_equal_to: 100000))
+          .to matcher.is_less_than_or_equal_to(100000)
+      end
+    end
+  end
+
   context 'with a custom validation message' do
     it 'accepts when the messages match' do
       expect(validating_numericality(message: 'custom')).
